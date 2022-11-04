@@ -1,0 +1,98 @@
+//Nguyen Thi May-62TH1
+//truong trinh mau duoc tham khao tren bai Cube.c <truong 3>
+
+#include <GL/gl.h>
+#include <GL/glu.h>
+#include <GL/glut.h>
+
+static GLfloat Ty1=0, Ty2=0, Tx1=0, Tx2 = 0, Tx_hhcn = 0;
+
+void animation(void){
+		if(Ty1<=1){
+			Ty1= Ty1 + 0.0002;
+		}
+		else if(Ty2>=-1){
+			Ty2= Ty2 - 0.0002;
+		}
+		
+		
+		if(Tx1>=-2){
+			Tx1= Tx1 - 0.0004;
+		}
+		else if(Tx2>=-2){
+			Tx2= Tx2 - 0.0004;
+		}
+		
+		if(Tx_hhcn>=-4){
+			Tx_hhcn= Tx_hhcn - 0.0004;
+		}
+	glutPostRedisplay();
+}
+
+void keyboard(unsigned char key, int x, int y){
+	if(key == 'm'){
+		int sum =0;
+		while(sum<=3){
+		glutIdleFunc(animation);
+		Ty1=0, Ty2=0, Tx1=0, Tx2 = 0, Tx_hhcn = 0;
+		glutIdleFunc(animation);
+		sum++;
+		}	
+	}
+}
+
+void init(void)
+{
+	glClearColor (0.0, 0.0, 0.0, 0.0);
+	glShadeModel (GL_FLAT);
+}
+
+void display(void)
+{
+	glClear (GL_COLOR_BUFFER_BIT);
+	glColor3f (1.0, 1.0, 1.0);
+	glLoadIdentity (); 
+	//gluLookAt (0.0, 0.0, 5.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+	
+	glTranslatef(4,0,0);
+	glPushMatrix();
+		glTranslatef(Tx2,Ty2,0);
+		glTranslatef(Tx1,Ty1,0);	
+		glTranslatef(0,0.45,0);
+		glutWireSphere (0.2,10,10);
+	glPopMatrix();
+	
+	glPushMatrix();
+		glTranslatef(Tx_hhcn,0,0);
+		glScalef (1.0, 0.5, 1.0); 
+		glutWireCube (1.0);
+	glPopMatrix();
+	
+	glFlush ();
+}
+
+void reshape (int w, int h)
+{
+	glViewport (0, 0, (GLsizei) w, (GLsizei) h);
+	glMatrixMode (GL_PROJECTION);
+	glLoadIdentity ();
+	//glFrustum (-1.0, 1.0, -1.0, 1.0, 1.5, 20.0);
+	glOrtho(-5.0, 5.0, -5.0, 5.0, -1, 1);
+	glMatrixMode (GL_MODELVIEW);
+}
+
+int main(int argc, char** argv)
+{
+	glutInit(&argc, argv);
+	glutInitDisplayMode (GLUT_SINGLE | GLUT_RGB);
+	glutInitWindowSize (600, 600);
+	glutInitWindowPosition (100, 100);
+	glutCreateWindow (argv[0]);
+	init ();
+	glutDisplayFunc(display);
+	glutReshapeFunc(reshape);
+	glutKeyboardFunc(keyboard);
+	glutMainLoop();
+	return 0;
+}
+

@@ -1,0 +1,72 @@
+
+1. câu lệnh nguồn sáng
+glLight{if}(light, pname, param);
+
+light: tên nguồn sáng, có 8 nguồn sáng: GL_LIGHT0, GL_LIGHT1,..., GL_LIGHT7.
+
+pname: thuộc tính nguồn sáng: GL_AMBIENT, GL_DIFFUSE, GL_SPECULAR, GL_POSITION.
+
+param: giá trị cụ thể cua pname
+
+
+2. thuộc tính chất liệu đối tượng
+
+glMaterial{if}v(mặt, pname, param)
+
+mặt: GL_FRONT, GL_BACK, GL_FRONT_AND_BACK
+prame: GL_AMBIENT, GL_DIFFUSE, GL_SPECULAR, GL_SHININESS
+param: giá trị cụ thể của thuộc tính
+
+	giá trị ngầm định: 
+		Ambient: xám(0.2,0.2,0.2,1)
+		Diffuse: trắng(0.8,0.8,0.8,1)
+		Specular: trắng(0,0,0,1)
+		shininess: độ nhẵn bóng 0.0(có giá trị 0->100)
+
+
+3. kích hoạt chiếu sáng
+
+	glEnable(GL_LIGHTING);
+//nếu tắt chế độ chiếu sáng <=> tắt cả khử mặt khuất và chiều sâu
+
+4. khử mặt khất
+
+- kích hoạt khử mặt khuất
+	glEnable(GL_DEPTH_TEST)
+
+- gọi bộ đệm chiều sâu
+	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+	//GL_COLOR_BUFFER_BIT|: bộ đệm màu
+	//GL_DEPTH_BUFFER_BIT: bộ đệm chiều sâu
+
+- chế độ hiển thị khử mặt khuất
+	glutInitDisplayMode(GLUT_DEPTH/...)
+
+
+
+5. glEnable(GL_LIGHT0) : kích hoạt bóng đèn light0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
